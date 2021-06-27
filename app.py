@@ -208,8 +208,8 @@ def hello():
 
 
 
-if __name__ == "__main__":
-    # schedule_messages(SCHEDULED_MESSAGE)
-    app.run(debug=True)
-    # app.run(debug=True, port = someInteger) if want to state another port other than 5000
+# if __name__ == "__main__":
+#     # schedule_messages(SCHEDULED_MESSAGE)
+#     app.run(debug=True)
+#     # app.run(debug=True, port = someInteger) if want to state another port other than 5000
 
