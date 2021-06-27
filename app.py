@@ -7,19 +7,29 @@ from slackeventsapi import SlackEventAdapter
 import string
 from datetime import datetime, timedelta
 
-#just to note where the env file can be found 
-env_path = Path('.')/'.env' 
-load_dotenv(dotenv_path=env_path)
+# #just to note where the env file can be found 
+# env_path = Path('.')/'.env' 
+# load_dotenv(dotenv_path=env_path)
+
+SLACK_TOKEN='xoxb-2171522868194-2171557891922-d4ax4rDSUE4CrVAifdvGmnBI'
+SIGNING_SECRET='0c208da29cfba8dec65f50cd789f2702'
 
 app = Flask(__name__)
 
-#slack event adapter will handle any slack events from the api.
-#(signing secret from slack api, where events will be sent to, which web server events will be sent to)
-slack_event_adapter = SlackEventAdapter(
-    os.environ['SIGNING_SECRET'], '/slack/events', app)
+@app.route("/")
+def hello():
+    return "Hello, World!"
 
-#to note which variable to look at for the OAuth Token
-client = slack.WebClient(token = os.environ['SLACK_TOKEN']) 
+# #slack event adapter will handle any slack events from the api.
+# #(signing secret from slack api, where events will be sent to, which web server events will be sent to)
+# slack_event_adapter = SlackEventAdapter(
+#     os.environ['SIGNING_SECRET'], '/slack/events', app)
+
+slack_event_adapter = SlackEventAdapter(SIGNING_SECRET, '/slack/events', app)
+
+# #to note which variable to look at for the OAuth Token
+# client = slack.WebClient(token = os.environ['SLACK_TOKEN']) 
+client = slack.WebClient(token = SLACK_TOKEN)
 
 BOT_ID = client.api_call("auth.test")['user_id'] #gives us the ID of our own bot
 
@@ -184,10 +194,6 @@ def reaction(payload):
     message = welcome.get_message() #reinstantiate the new updated message
     updated_message = client.chat_update(**message) #reprint the updated message into the dm with the bot
     welcome.timestamp = updated_message['ts']
-
-@app.route("/")
-def hello():
-    return "Hello, World!"
 
 #handles the command /message-count
 @app.route('/message-count', methods=['POST'])
