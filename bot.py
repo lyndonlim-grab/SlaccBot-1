@@ -185,6 +185,10 @@ def reaction(payload):
     updated_message = client.chat_update(**message) #reprint the updated message into the dm with the bot
     welcome.timestamp = updated_message['ts']
 
+@app.route("/")
+def hello():
+    return "Hello, World!"
+
 #handles the command /message-count
 @app.route('/message-count', methods=['POST'])
 def message_count():
