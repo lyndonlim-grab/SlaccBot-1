@@ -1,7 +1,7 @@
 import slack
-import os
-from pathlib import Path
-from dotenv import load_dotenv
+# import os
+# from pathlib import Path
+# from dotenv import load_dotenv
 from flask import Flask, request, Response
 from slackeventsapi import SlackEventAdapter
 import string
