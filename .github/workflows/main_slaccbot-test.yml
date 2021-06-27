@@ -59,4 +59,4 @@ jobs:
         with:
           app-name: 'slaccbot-test'
           slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_c1b98f817a0c473997ccdf74f676ab80 }}
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_a62d222506b1480792afe18bfbd0d197 }}
